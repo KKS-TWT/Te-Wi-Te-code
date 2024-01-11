@@ -1,0 +1,15 @@
+==== Response Headers
+|===
+|Element|한글명|Type|Required|Description
+
+{{#headers}}
+
+|{{#tableCellContent}}`+{{name}}+`{{/tableCellContent}}
+|{{#tableCellContent}}`+{{koreanTitle}}+`{{/tableCellContent}}
+|{{#tableCellContent}}`+{{type}}+`{{/tableCellContent}}
+|{{#tableCellContent}}{{#optional}}N{{/optional}}{{^optional}}Y{{/optional}}{{/tableCellContent}}
+|{{#tableCellContent}}{{description}}{{/tableCellContent}}
+
+{{/headers}}
+
+|===

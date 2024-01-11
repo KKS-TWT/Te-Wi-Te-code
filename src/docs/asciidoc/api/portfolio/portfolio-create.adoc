@@ -1,0 +1,20 @@
+[[portfolio-create]]
+== 포트폴리오 추가
+
+=== API 개요
+
+* 포트폴리오를 생성합니다.
+
+=== HTTP Request
+
+include::{snippets}/portfolio-create/http-request.adoc[]
+include::{snippets}/portfolio-create/request-headers.adoc[]
+include::{snippets}/portfolio-create/request-body.adoc[]
+include::{snippets}/portfolio-create/request-fields.adoc[]
+
+=== HTTP Response
+
+include::{snippets}/portfolio-create/http-response.adoc[]
+include::{snippets}/portfolio-create/response-headers.adoc[]
+include::{snippets}/portfolio-create/response-body.adoc[]
+include::{snippets}/portfolio-create/response-fields.adoc[]

@@ -1,0 +1,19 @@
+[[portfolio-retrieve]]
+== 포트폴리오 1건 조회
+
+=== API 개요
+
+* 1건의 포트폴리오를 조회합니다.
+
+=== HTTP Request
+
+include::{snippets}/portfolio-retrieve/http-request.adoc[]
+include::{snippets}/portfolio-retrieve/path-parameters.adoc[]
+include::{snippets}/portfolio-retrieve/request-headers.adoc[]
+
+=== HTTP Response
+
+include::{snippets}/portfolio-retrieve/http-response.adoc[]
+include::{snippets}/portfolio-retrieve/response-headers.adoc[]
+include::{snippets}/portfolio-retrieve/response-body.adoc[]
+include::{snippets}/portfolio-retrieve/response-fields.adoc[]
