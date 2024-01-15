@@ -22,8 +22,8 @@ import spofo.holdingstock.controller.response.HoldingStockResponse;
 import spofo.holdingstock.domain.HoldingStock;
 import spofo.holdingstock.domain.HoldingStockCreate;
 import spofo.holdingstock.domain.HoldingStockStatistic;
-import spofo.portfolio.controller.port.PortfolioService;
 import spofo.portfolio.domain.Portfolio;
+import spofo.portfolio.service.PortfolioService;
 import spofo.tradelog.controller.port.TradeLogService;
 import spofo.tradelog.domain.TradeLogCreate;
 

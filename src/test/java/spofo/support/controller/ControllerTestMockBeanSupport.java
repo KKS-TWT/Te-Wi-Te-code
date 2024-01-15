@@ -2,7 +2,7 @@ package spofo.support.controller;
 
 import org.springframework.boot.test.mock.mockito.MockBean;
 import spofo.holdingstock.controller.port.HoldingStockService;
-import spofo.portfolio.controller.port.PortfolioService;
+import spofo.portfolio.service.PortfolioService;
 import spofo.tradelog.controller.port.TradeLogService;
 
 /**

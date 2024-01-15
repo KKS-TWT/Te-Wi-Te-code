@@ -25,7 +25,6 @@ import spofo.mock.FakeHoldingStockRepository;
 import spofo.mock.FakeHoldingStockService;
 import spofo.mock.FakePortfolioRepository;
 import spofo.mock.FakeStockServerService;
-import spofo.portfolio.controller.port.PortfolioService;
 import spofo.portfolio.controller.request.PortfolioSearchCondition;
 import spofo.portfolio.domain.Portfolio;
 import spofo.portfolio.domain.PortfolioCreate;
@@ -35,11 +34,11 @@ import spofo.portfolio.domain.TotalPortfoliosStatistic;
 import spofo.portfolio.domain.enums.Currency;
 import spofo.portfolio.domain.enums.IncludeType;
 import spofo.portfolio.domain.enums.PortfolioType;
-import spofo.portfolio.service.PortfolioServiceImpl;
+import spofo.portfolio.service.PortfolioService;
 import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 
-public class PortfolioServiceTest {
+class PortfolioServiceTest {
 
     private PortfolioService portfolioService;
     private FakeStockServerService fakeStockServerService;
@@ -54,7 +53,7 @@ public class PortfolioServiceTest {
         fakePortfolioRepository = new FakePortfolioRepository();
         fakeStockServerService = new FakeStockServerService();
         fakeHoldingStockService = new FakeHoldingStockService(fakeHoldingStockRepository);
-        portfolioService = new PortfolioServiceImpl(fakePortfolioRepository,
+        portfolioService = new PortfolioService(fakePortfolioRepository,
                 fakeHoldingStockService, fakeStockServerService);
 
         Stock stock = Stock.builder()
@@ -553,7 +552,7 @@ public class PortfolioServiceTest {
         assertThatThrownBy(() -> portfolioService.getPortfolio(portfolioId))
                 .isInstanceOf(PortfolioNotFound.class)
                 .hasMessage(PORTFOLIO_NOT_FOUND.getMessage());
-        assertThat(fakeHoldingStockService.getByPortfolioId(portfolioId)).hasSize(0);
+        assertThat(fakeHoldingStockService.getByPortfolioId(portfolioId)).isEmpty();
     }
 
     @Test

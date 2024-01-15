@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import spofo.holdingstock.controller.port.HoldingStockService;
 import spofo.holdingstock.service.port.HoldingStockRepository;
-import spofo.portfolio.controller.port.PortfolioService;
+import spofo.portfolio.service.PortfolioService;
 import spofo.portfolio.service.port.PortfolioRepository;
 import spofo.stock.service.StockServerService;
 import spofo.support.annotation.CustomServiceIntegrationTest;

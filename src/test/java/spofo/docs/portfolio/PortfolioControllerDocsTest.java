@@ -43,7 +43,6 @@ import org.springframework.restdocs.payload.FieldDescriptor;
 import org.springframework.restdocs.request.ParameterDescriptor;
 import spofo.docs.RestDocsSupport;
 import spofo.portfolio.controller.PortfolioController;
-import spofo.portfolio.controller.port.PortfolioService;
 import spofo.portfolio.controller.request.PortfolioSearchCondition;
 import spofo.portfolio.domain.Portfolio;
 import spofo.portfolio.domain.PortfolioCreate;
@@ -53,6 +52,7 @@ import spofo.portfolio.domain.TotalPortfoliosStatistic;
 import spofo.portfolio.domain.enums.Currency;
 import spofo.portfolio.domain.enums.IncludeType;
 import spofo.portfolio.domain.enums.PortfolioType;
+import spofo.portfolio.service.PortfolioService;
 
 public class PortfolioControllerDocsTest extends RestDocsSupport {
 
