@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import spofo.global.domain.exception.HoldingStockNotFound;
-import spofo.holdingstock.controller.port.HoldingStockService;
 import spofo.holdingstock.domain.HoldingStock;
 import spofo.holdingstock.domain.HoldingStockCreate;
 import spofo.holdingstock.domain.HoldingStockStatistic;
@@ -21,18 +20,16 @@ import spofo.tradelog.domain.TradeLogCreate;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class HoldingStockServiceImpl implements HoldingStockService {
+public class HoldingStockService {
 
     private final TradeLogService tradeLogService;
     private final HoldingStockRepository holdingStockRepository;
     private final StockServerService stockServerService;
 
-    @Override
     public List<HoldingStock> getByPortfolioId(Long portfolioId) {
         return holdingStockRepository.findByPortfolioId(portfolioId);
     }
 
-    @Override
     public HoldingStockStatistic getStatistic(Long id) {
         HoldingStock holdingStock = findById(id);
         String stockCode = holdingStock.getStockCode();
@@ -41,18 +38,15 @@ public class HoldingStockServiceImpl implements HoldingStockService {
         return HoldingStockStatistic.of(holdingStock, stock);
     }
 
-    @Override
     public HoldingStock get(Long id) {
         return findById(id);
     }
 
-    @Override
     public HoldingStock get(Portfolio portfolio, String stockCode) {
         return holdingStockRepository.findByStockCode(portfolio, stockCode)
                 .orElse(null);
     }
 
-    @Override
     @Transactional
     public HoldingStock create(HoldingStockCreate holdingStockCreate, TradeLogCreate tradeLogCreate,
             Portfolio portfolio) {
@@ -64,7 +58,6 @@ public class HoldingStockServiceImpl implements HoldingStockService {
         return savedHoldingStock;
     }
 
-    @Override
     @Transactional
     public void delete(Long id) {
         HoldingStock savedHoldingStock = findById(id);
@@ -72,7 +65,6 @@ public class HoldingStockServiceImpl implements HoldingStockService {
         holdingStockRepository.delete(savedHoldingStock);
     }
 
-    @Override
     @Transactional
     public void deleteByPortfolioId(Long portfolioId) {
         List<HoldingStock> holdingStocks = holdingStockRepository.findByPortfolioId(portfolioId);
@@ -82,7 +74,6 @@ public class HoldingStockServiceImpl implements HoldingStockService {
         holdingStockRepository.deleteByPortfolioId(portfolioId);
     }
 
-    @Override
     public List<HoldingStockStatistic> getHoldingStockStatistics(Long portfolioId) {
         List<HoldingStock> holdingStocks = getByPortfolioId(portfolioId);
         List<String> stockCodes = getStockCodes(holdingStocks);
