@@ -10,7 +10,7 @@ import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 import spofo.tradelog.domain.TradeLogCreate;
 
-public class TradeLogTest {
+class TradeLogTest {
 
     @Test
     @DisplayName("TradeLogCreate 로 매매이력 도메인을 생성한다.")
@@ -28,8 +28,8 @@ public class TradeLogTest {
         TradeLog tradeLog = TradeLog.of(create, holdingStock, stock);
 
         // then
-        assertThat(tradeLog.getId()).isNull();
-        assertThat(tradeLog.getPrice()).isEqualTo(TEN);
+        assertThat(tradeLog).extracting(TradeLog::getId, TradeLog::getPrice)
+                .containsExactly(null, TEN);
     }
 
 }

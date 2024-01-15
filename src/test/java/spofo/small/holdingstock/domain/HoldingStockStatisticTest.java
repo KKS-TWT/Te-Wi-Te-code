@@ -14,7 +14,7 @@ import spofo.holdingstock.domain.HoldingStockStatistic;
 import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 
-public class HoldingStockStatisticTest {
+class HoldingStockStatisticTest {
 
     private final String TEST_STOCK_CODE = "000660";
     private final String TEST_STOCK_NAME = "SK하이닉스";
@@ -34,16 +34,19 @@ public class HoldingStockStatisticTest {
         HoldingStockStatistic statistic = HoldingStockStatistic.of(holdingStock, getStock());
 
         // then
-        assertThat(statistic.getHoldingStockInfo().getCode()).isEqualTo(TEST_STOCK_CODE);
-        assertThat(statistic.getHoldingStockInfo().getName()).isEqualTo(TEST_STOCK_NAME);
-        assertThat(statistic.getHoldingStockInfo().getPrice()).isEqualTo(TEST_STOCK_PRICE);
-        assertThat(statistic.getHoldingStockInfo().getSector()).isEqualTo(TEST_STOCK_SECTOR);
-        assertThat(statistic.getTotalAsset()).isEqualTo(getBD(132_000));
-        assertThat(statistic.getGain()).isEqualTo(getBD(70_400));
-        assertThat(statistic.getGainRate()).isEqualTo(getBD(114.29));
-        assertThat(statistic.getAvgPrice()).isEqualTo(getBD(30_800));
-        assertThat(statistic.getCurrentPrice()).isEqualTo(getBD(66_000));
-        assertThat(statistic.getQuantity()).isEqualTo(getBD(2));
+        assertThat(statistic).extracting(
+                s -> s.getHoldingStockInfo().getCode(), s -> s.getHoldingStockInfo().getName(),
+                s -> s.getHoldingStockInfo().getPrice(), s -> s.getHoldingStockInfo().getSector(),
+                HoldingStockStatistic::getTotalAsset, HoldingStockStatistic::getGain,
+                HoldingStockStatistic::getGainRate, HoldingStockStatistic::getAvgPrice,
+                HoldingStockStatistic::getCurrentPrice, HoldingStockStatistic::getQuantity
+        ).containsExactly(
+                TEST_STOCK_CODE, TEST_STOCK_NAME,
+                TEST_STOCK_PRICE, TEST_STOCK_SECTOR,
+                getBD(132_000), getBD(70_400),
+                getBD(114.29), getBD(30_800),
+                getBD(66_000), getBD(2)
+        );
     }
 
     @Test
@@ -60,16 +63,19 @@ public class HoldingStockStatisticTest {
         HoldingStockStatistic statistic = HoldingStockStatistic.of(holdingStock, getStock());
 
         // then
-        assertThat(statistic.getHoldingStockInfo().getCode()).isEqualTo(TEST_STOCK_CODE);
-        assertThat(statistic.getHoldingStockInfo().getName()).isEqualTo(TEST_STOCK_NAME);
-        assertThat(statistic.getHoldingStockInfo().getPrice()).isEqualTo(TEST_STOCK_PRICE);
-        assertThat(statistic.getHoldingStockInfo().getSector()).isEqualTo(TEST_STOCK_SECTOR);
-        assertThat(statistic.getTotalAsset()).isEqualTo(getBD(264_000));
-        assertThat(statistic.getGain()).isEqualTo(getBD(47_160));
-        assertThat(statistic.getGainRate()).isEqualTo(getBD(21.75));
-        assertThat(statistic.getAvgPrice()).isEqualTo(getBD(54_210));
-        assertThat(statistic.getCurrentPrice()).isEqualTo(getBD(66_000));
-        assertThat(statistic.getQuantity()).isEqualTo(getBD(4));
+        assertThat(statistic).extracting(
+                s -> s.getHoldingStockInfo().getCode(), s -> s.getHoldingStockInfo().getName(),
+                s -> s.getHoldingStockInfo().getPrice(), s -> s.getHoldingStockInfo().getSector(),
+                HoldingStockStatistic::getTotalAsset, HoldingStockStatistic::getGain,
+                HoldingStockStatistic::getGainRate, HoldingStockStatistic::getAvgPrice,
+                HoldingStockStatistic::getCurrentPrice, HoldingStockStatistic::getQuantity
+        ).containsExactly(
+                TEST_STOCK_CODE, TEST_STOCK_NAME,
+                TEST_STOCK_PRICE, TEST_STOCK_SECTOR,
+                getBD(264_000), getBD(47_160),
+                getBD(21.75), getBD(54_210),
+                getBD(66_000), getBD(4)
+        );
     }
 
     private HoldingStock getHoldingStock(List<TradeLog> tradeLog) {

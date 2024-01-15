@@ -9,13 +9,12 @@ import spofo.holdingstock.domain.HoldingStock;
 import spofo.holdingstock.domain.HoldingStockInfo;
 import spofo.stock.domain.Stock;
 
-public class HoldingStockInfoTest {
+class HoldingStockInfoTest {
 
     @Test
     @DisplayName("보유종목과 주식 정보를 가지고 주식정보를 담은 보유종목을 만든다.")
     void createHoldingStockInfo() {
         // given
-        Long id = 1L;
         String stockCode = "101010";
 
         HoldingStock holdingStock = HoldingStock.builder()
@@ -36,13 +35,14 @@ public class HoldingStockInfoTest {
         HoldingStockInfo stockInfo = HoldingStockInfo.of(holdingStock, stock);
 
         // then
-        assertThat(stockInfo.getHoldingStock().getId()).isEqualTo(holdingStock.getId());
-        assertThat(stockInfo.getHoldingStock().getStockCode())
-                .isEqualTo(holdingStock.getStockCode());
-        assertThat(stockInfo.getName()).isEqualTo(stock.getName());
-        assertThat(stockInfo.getPrice()).isEqualTo(stock.getPrice());
-        assertThat(stockInfo.getMarket()).isEqualTo(stock.getMarket());
-        assertThat(stockInfo.getSector()).isEqualTo(stock.getSector());
-        assertThat(stockInfo.getImageUrl()).isEqualTo(stock.getImageUrl());
+        assertThat(stockInfo).extracting(
+                i -> i.getHoldingStock().getId(), i -> i.getHoldingStock().getStockCode(),
+                HoldingStockInfo::getName, HoldingStockInfo::getPrice, HoldingStockInfo::getMarket,
+                HoldingStockInfo::getSector, HoldingStockInfo::getImageUrl
+        ).containsExactly(
+                1L, "101010",
+                "하이닉스", ONE, "코스피",
+                "반도체", "이미지 경로"
+        );
     }
 }

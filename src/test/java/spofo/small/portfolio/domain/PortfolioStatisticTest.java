@@ -8,6 +8,7 @@ import static spofo.tradelog.domain.enums.TradeType.BUY;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import spofo.holdingstock.domain.HoldingStock;
@@ -16,7 +17,7 @@ import spofo.portfolio.domain.PortfolioStatistic;
 import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 
-public class PortfolioStatisticTest {
+class PortfolioStatisticTest {
 
     private final String TEST_STOCK_CODE = "000660";
 
@@ -39,11 +40,15 @@ public class PortfolioStatisticTest {
         PortfolioStatistic statistic = PortfolioStatistic.of(portfolio, getStockMap());
 
         // then
-        assertThat(statistic.getPortfolio().getId()).isEqualTo(1L);
-        assertThat(statistic.getTotalAsset()).isEqualTo(getBD(66000));
-        assertThat(statistic.getTotalBuy()).isEqualTo(getBD(33000));
-        assertThat(statistic.getTotalGain()).isEqualTo(getBD(33000));
-        assertThat(statistic.getGainRate()).isEqualTo(getBD(100));
+        assertThat(statistic).extracting(
+                s -> s.getPortfolio().getId(),
+                PortfolioStatistic::getTotalAsset, PortfolioStatistic::getTotalBuy,
+                PortfolioStatistic::getTotalGain, PortfolioStatistic::getGainRate
+        ).containsExactly(
+                1L,
+                getBD(66_000), getBD(33_000),
+                getBD(33_000), getBD(100)
+        );
     }
 
     @Test
@@ -55,13 +60,13 @@ public class PortfolioStatisticTest {
                 .build();
 
         // when
-        PortfolioStatistic portfolioStatistic = PortfolioStatistic.of(portfolio, getStockMap());
+        PortfolioStatistic statistic = PortfolioStatistic.of(portfolio, getStockMap());
 
         // then
-        assertThat(portfolioStatistic.getGainRate()).isEqualTo(ZERO);
-        assertThat(portfolioStatistic.getTotalGain()).isEqualTo(ZERO);
-        assertThat(portfolioStatistic.getTotalBuy()).isEqualTo(ZERO);
-        assertThat(portfolioStatistic.getTotalAsset()).isEqualTo(ZERO);
+        assertThat(statistic).extracting(
+                PortfolioStatistic::getTotalAsset, PortfolioStatistic::getTotalBuy,
+                PortfolioStatistic::getTotalGain, PortfolioStatistic::getGainRate
+        ).containsExactly(ZERO, ZERO, ZERO, ZERO)
     }
 
     private HoldingStock getHoldingStock(TradeLog tradeLog) {

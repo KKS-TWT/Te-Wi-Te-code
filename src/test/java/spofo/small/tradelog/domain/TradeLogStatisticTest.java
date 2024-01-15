@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import spofo.tradelog.domain.TradeLog;
 import spofo.tradelog.domain.TradeLogStatistic;
 
-public class TradeLogStatisticTest {
+class TradeLogStatisticTest {
 
     @Test
     @DisplayName("1개의 매매이력으로 매매이력 통계를 만든다.")
@@ -22,9 +22,15 @@ public class TradeLogStatisticTest {
         TradeLogStatistic statistic = TradeLogStatistic.of(log);
 
         // then
-        assertThat(statistic.getType()).isEqualTo(log.getType());
-        assertThat(statistic.getGain()).isEqualTo(getBD(-44000));
-        assertThat(statistic.getTotalPrice()).isEqualTo(getBD(66000));
+        assertThat(statistic).extracting(
+                TradeLogStatistic::getType,
+                TradeLogStatistic::getGain,
+                TradeLogStatistic::getTotalPrice
+        ).containsExactly(
+                BUY,
+                getBD(-44_000),
+                getBD(66_000)
+        );
     }
 
     private TradeLog getTradeLog(BigDecimal price, BigDecimal quantity) {
@@ -32,7 +38,7 @@ public class TradeLogStatisticTest {
                 .type(BUY)
                 .price(price)
                 .quantity(quantity)
-                .marketPrice(getBD(11000))
+                .marketPrice(getBD(11_000))
                 .build();
     }
 }

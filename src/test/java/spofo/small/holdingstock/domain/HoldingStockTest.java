@@ -8,7 +8,7 @@ import spofo.holdingstock.domain.HoldingStock;
 import spofo.holdingstock.domain.HoldingStockCreate;
 import spofo.portfolio.domain.Portfolio;
 
-public class HoldingStockTest {
+class HoldingStockTest {
 
     @Test
     @DisplayName("HoldingStockCreate로 보유종목 도메인을 생성한다.")
@@ -25,8 +25,8 @@ public class HoldingStockTest {
         HoldingStock holdingStock = HoldingStock.of(create, portfolio);
 
         // then
-        assertThat(holdingStock.getId()).isNull();
-        assertThat(holdingStock.getStockCode()).isEqualTo(stockCode);
-        assertThat(holdingStock.getPortfolio()).isEqualTo(portfolio);
+        assertThat(holdingStock).extracting(HoldingStock::getId, HoldingStock::getStockCode,
+                        HoldingStock::getPortfolio)
+                .containsExactly(null, stockCode, portfolio);
     }
 }

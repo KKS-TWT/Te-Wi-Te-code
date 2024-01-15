@@ -18,7 +18,7 @@ import spofo.portfolio.domain.TotalPortfoliosStatistic;
 import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 
-public class TotalPortofoliosStatisticTest {
+class TotalPortofoliosStatisticTest {
 
     private final String TEST_STOCK_CODE = "000660";
 
@@ -47,9 +47,15 @@ public class TotalPortofoliosStatisticTest {
                 List.of(statistic1, statistic2));
 
         // then
-        assertThat(statistic.getTotalAsset()).isEqualTo(getBD(198000));
-        assertThat(statistic.getGain()).isEqualTo(getBD(99000));
-        assertThat(statistic.getGainRate()).isEqualTo(getBD(100));
+        assertThat(statistic).extracting(
+                TotalPortfoliosStatistic::getTotalAsset,
+                TotalPortfoliosStatistic::getGain,
+                TotalPortfoliosStatistic::getGainRate
+        ).containsExactly(
+                getBD(198_000),
+                getBD(99_000),
+                getBD(100)
+        );
     }
 
     @Test
@@ -64,16 +70,22 @@ public class TotalPortofoliosStatisticTest {
                 .holdingStocks(List.of(holdingStock))
                 .build();
 
-        PortfolioStatistic statistic = PortfolioStatistic.of(portfolio, getStockMap());
+        PortfolioStatistic statistic1 = PortfolioStatistic.of(portfolio, getStockMap());
 
         // when
-        TotalPortfoliosStatistic totalPortfoliosStatistic = TotalPortfoliosStatistic.of(
-                List.of(statistic));
+        TotalPortfoliosStatistic statistic = TotalPortfoliosStatistic.of(
+                List.of(statistic1));
 
         // then
-        assertThat(totalPortfoliosStatistic.getTotalAsset()).isEqualTo(getBD(66000));
-        assertThat(totalPortfoliosStatistic.getGain()).isEqualTo(getBD(33000));
-        assertThat(totalPortfoliosStatistic.getGainRate()).isEqualTo(getBD(100));
+        assertThat(statistic).extracting(
+                TotalPortfoliosStatistic::getTotalAsset,
+                TotalPortfoliosStatistic::getGain,
+                TotalPortfoliosStatistic::getGainRate
+        ).containsExactly(
+                getBD(66_000),
+                getBD(33_000),
+                getBD(100)
+        );
     }
 
     @Test
@@ -88,16 +100,18 @@ public class TotalPortofoliosStatisticTest {
                 .holdingStocks(List.of(holdingStock))
                 .build();
 
-        PortfolioStatistic statistic = PortfolioStatistic.of(portfolio, getStockMap());
+        PortfolioStatistic statistic1 = PortfolioStatistic.of(portfolio, getStockMap());
 
         // when
-        TotalPortfoliosStatistic totalPortfoliosStatistic = TotalPortfoliosStatistic.of(
-                List.of(statistic));
+        TotalPortfoliosStatistic statistic = TotalPortfoliosStatistic.of(
+                List.of(statistic1));
 
         // then
-        assertThat(totalPortfoliosStatistic.getTotalAsset()).isEqualTo(ZERO);
-        assertThat(totalPortfoliosStatistic.getGain()).isEqualTo(ZERO);
-        assertThat(totalPortfoliosStatistic.getGainRate()).isEqualTo(ZERO);
+        assertThat(statistic).extracting(
+                TotalPortfoliosStatistic::getTotalAsset,
+                TotalPortfoliosStatistic::getGain,
+                TotalPortfoliosStatistic::getGainRate
+        ).containsExactly(ZERO, ZERO, ZERO);
     }
 
     @Test
@@ -115,9 +129,11 @@ public class TotalPortofoliosStatisticTest {
         TotalPortfoliosStatistic statistic = TotalPortfoliosStatistic.of(List.of(statistic1));
 
         // then
-        assertThat(statistic.getTotalAsset()).isEqualTo(ZERO);
-        assertThat(statistic.getGain()).isEqualTo(ZERO);
-        assertThat(statistic.getGainRate()).isEqualTo(ZERO);
+        assertThat(statistic).extracting(
+                TotalPortfoliosStatistic::getTotalAsset,
+                TotalPortfoliosStatistic::getGain,
+                TotalPortfoliosStatistic::getGainRate
+        ).containsExactly(ZERO, ZERO, ZERO);
     }
 
     private HoldingStock getHoldingStock(TradeLog tradeLog) {
