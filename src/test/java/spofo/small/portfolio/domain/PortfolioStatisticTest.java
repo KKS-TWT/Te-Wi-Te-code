@@ -8,7 +8,6 @@ import static spofo.tradelog.domain.enums.TradeType.BUY;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import spofo.holdingstock.domain.HoldingStock;
@@ -66,7 +65,7 @@ class PortfolioStatisticTest {
         assertThat(statistic).extracting(
                 PortfolioStatistic::getTotalAsset, PortfolioStatistic::getTotalBuy,
                 PortfolioStatistic::getTotalGain, PortfolioStatistic::getGainRate
-        ).containsExactly(ZERO, ZERO, ZERO, ZERO)
+        ).containsExactly(ZERO, ZERO, ZERO, ZERO);
     }
 
     private HoldingStock getHoldingStock(TradeLog tradeLog) {
