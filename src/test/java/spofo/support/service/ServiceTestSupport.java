@@ -1,44 +1,50 @@
 package spofo.support.service;
 
+import org.junit.jupiter.api.AfterEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.mock.mockito.SpyBean;
 import spofo.holdingstock.service.HoldingStockService;
 import spofo.holdingstock.service.port.HoldingStockRepository;
 import spofo.portfolio.service.PortfolioService;
 import spofo.portfolio.service.port.PortfolioRepository;
 import spofo.stock.service.StockServerService;
-import spofo.support.annotation.CustomServiceTest;
+import spofo.support.annotation.CustomServiceIntegrationTest;
 import spofo.tradelog.service.TradeLogService;
 import spofo.tradelog.service.port.TradeLogRepository;
 
 /**
- * Repository를 @SpyBean으로 선언한 이유는 1:N의 관계를 테스트 할 때
- * 양쪽 다 저장 후, 1쪽에서 N의 객체를 조회하려 할 때 1은 외래키의 주인이 아니므로
- * 같은 트랜잭션 내에서 조회가 불가능한 이슈가 있으므로
- * 필요 시 Mocking 할 수도 있고, 실제 로직을 사용할 수도 있는 @SpyBean으로 선언하였다.
+ * ServiceIntegrationTest에서는 테스트에 @Transactional을 붙이지 않고
+ * tearDown하는 메서드를 추가해줌으로써 보다 실제와 비슷한 환경에서 테스트한다.
+ * 그리고 외부 의존성 (StockServer)를 제외하고 mocking 하지 않는다.
  */
-@CustomServiceTest
+@CustomServiceIntegrationTest
 public abstract class ServiceTestSupport {
 
     @Autowired
     protected PortfolioService portfolioService;
 
     @Autowired
+    protected PortfolioRepository portfolioRepository;
+
+    @Autowired
     protected HoldingStockService holdingStockService;
+
+    @Autowired
+    protected HoldingStockRepository holdingStockRepository;
 
     @Autowired
     protected TradeLogService tradeLogService;
 
-    @SpyBean
-    protected PortfolioRepository portfolioRepository;
-
-    @SpyBean
-    protected HoldingStockRepository holdingStockRepository;
-
-    @SpyBean
+    @Autowired
     protected TradeLogRepository tradeLogRepository;
 
     @MockBean
     protected StockServerService mockStockServerService;
+
+    @AfterEach
+    public void tearDown() {
+        tradeLogRepository.deleteAll();
+        holdingStockRepository.deleteAll();
+        portfolioRepository.deleteAll();
+    }
 }

@@ -21,12 +21,12 @@ import spofo.holdingstock.domain.HoldingStockCreate;
 import spofo.portfolio.domain.Portfolio;
 import spofo.portfolio.domain.PortfolioCreate;
 import spofo.stock.domain.Stock;
-import spofo.support.service.ServiceIntegrationTestSupport;
+import spofo.support.service.ServiceTestSupport;
 import spofo.tradelog.domain.TradeLog;
 import spofo.tradelog.domain.TradeLogCreate;
 import spofo.tradelog.domain.TradeLogStatistic;
 
-public class TradeLogIntegrationTest extends ServiceIntegrationTestSupport {
+class TradeLogTest extends ServiceTestSupport {
 
     private static final String PORTFOLIO_CREATE_NAME = "포트폴리오 생성";
     private static final String PORTFOLIO_CREATE_DESC = "포트폴리오 생성입니다.";
