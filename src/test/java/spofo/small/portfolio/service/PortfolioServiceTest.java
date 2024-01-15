@@ -53,8 +53,7 @@ class PortfolioServiceTest {
         fakePortfolioRepository = new FakePortfolioRepository();
         fakeStockServerService = new FakeStockServerService();
         fakeHoldingStockService = new FakeHoldingStockService(fakeHoldingStockRepository);
-        portfolioService = new PortfolioService(fakePortfolioRepository,
-                fakeHoldingStockService, fakeStockServerService);
+        portfolioService = null;
 
         Stock stock = Stock.builder()
                 .code(TEST_STOCK_CODE)

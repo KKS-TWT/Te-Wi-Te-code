@@ -14,11 +14,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import spofo.global.domain.exception.HoldingStockNotFound;
-import spofo.holdingstock.controller.port.HoldingStockService;
 import spofo.holdingstock.domain.HoldingStock;
 import spofo.holdingstock.domain.HoldingStockCreate;
 import spofo.holdingstock.domain.HoldingStockStatistic;
-import spofo.holdingstock.service.HoldingStockServiceImpl;
+import spofo.holdingstock.service.HoldingStockService;
 import spofo.mock.FakeHoldingStockRepository;
 import spofo.mock.FakePortfolioRepository;
 import spofo.mock.FakePortfolioService;
@@ -29,7 +28,7 @@ import spofo.stock.domain.Stock;
 import spofo.tradelog.domain.TradeLog;
 import spofo.tradelog.domain.TradeLogCreate;
 
-public class HoldingStockServiceTest {
+class HoldingStockServiceTest {
 
     private HoldingStockService holdingStockService;
     private FakePortfolioService fakePortfolioService;
@@ -50,7 +49,7 @@ public class HoldingStockServiceTest {
         fakePortfolioService
                 = new FakePortfolioService(fakePortfolioRepository, fakeStockServerService);
         holdingStockService =
-                new HoldingStockServiceImpl(
+                new HoldingStockService(
                         fakeTradeLogService, fakeHoldingStockRepository, fakeStockServerService
                 );
 
