@@ -11,10 +11,10 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import spofo.auth.domain.MemberInfo;
+import spofo.auth.service.AuthServerServiceImpl;
 import spofo.global.config.restclient.RestClientConfig;
 import spofo.global.config.security.token.AuthenticationToken;
 import spofo.holdingstock.controller.HoldingStockController;
-import spofo.mock.FakeAuthServerService;
 import spofo.portfolio.controller.PortfolioController;
 import spofo.tradelog.controller.TradeLogController;
 
@@ -24,7 +24,7 @@ import spofo.tradelog.controller.TradeLogController;
 @ActiveProfiles("test")
 @WebMvcTest(controllers = {PortfolioController.class, HoldingStockController.class,
         TradeLogController.class})
-@Import({FakeAuthServerService.class, RestClientConfig.class})
+@Import({AuthServerServiceImpl.class, RestClientConfig.class})
 // 스프링 시큐리티를 사용하지 않을 때 필터 제외
 @AutoConfigureMockMvc(addFilters = false)
 public abstract class ControllerTestSupport extends ControllerTestMockBeanSupport {
