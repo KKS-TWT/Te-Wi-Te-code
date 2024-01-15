@@ -17,13 +17,12 @@ import spofo.holdingstock.domain.HoldingStock;
 import spofo.mock.FakeStockServerService;
 import spofo.mock.FakeTradeLogRepository;
 import spofo.stock.domain.Stock;
-import spofo.tradelog.controller.port.TradeLogService;
 import spofo.tradelog.domain.TradeLog;
 import spofo.tradelog.domain.TradeLogCreate;
 import spofo.tradelog.domain.TradeLogStatistic;
-import spofo.tradelog.service.TradeLogServiceImpl;
+import spofo.tradelog.service.TradeLogService;
 
-public class TradeLogServiceTest {
+class TradeLogServiceTest {
 
     private TradeLogService tradeLogService;
     private FakeStockServerService fakeStockServerService;
@@ -35,7 +34,7 @@ public class TradeLogServiceTest {
     void setup() {
         fakeTradeLogRepository = new FakeTradeLogRepository();
         fakeStockServerService = new FakeStockServerService();
-        tradeLogService = new TradeLogServiceImpl(fakeTradeLogRepository, fakeStockServerService);
+        tradeLogService = new TradeLogService(fakeTradeLogRepository, fakeStockServerService);
 
         Stock stock = Stock.builder()
                 .code(TEST_STOCK_CODE)

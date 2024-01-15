@@ -14,8 +14,8 @@ import spofo.holdingstock.service.port.HoldingStockRepository;
 import spofo.portfolio.domain.Portfolio;
 import spofo.stock.domain.Stock;
 import spofo.stock.service.StockServerService;
-import spofo.tradelog.controller.port.TradeLogService;
 import spofo.tradelog.domain.TradeLogCreate;
+import spofo.tradelog.service.TradeLogService;
 
 @Service
 @Transactional(readOnly = true)

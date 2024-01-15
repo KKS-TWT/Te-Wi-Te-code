@@ -24,8 +24,8 @@ import spofo.holdingstock.domain.HoldingStockStatistic;
 import spofo.holdingstock.service.HoldingStockService;
 import spofo.portfolio.domain.Portfolio;
 import spofo.portfolio.service.PortfolioService;
-import spofo.tradelog.controller.port.TradeLogService;
 import spofo.tradelog.domain.TradeLogCreate;
+import spofo.tradelog.service.TradeLogService;
 
 @RestController
 @RequiredArgsConstructor

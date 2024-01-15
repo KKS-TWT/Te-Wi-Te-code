@@ -9,7 +9,7 @@ import spofo.portfolio.service.PortfolioService;
 import spofo.portfolio.service.port.PortfolioRepository;
 import spofo.stock.service.StockServerService;
 import spofo.support.annotation.CustomServiceTest;
-import spofo.tradelog.controller.port.TradeLogService;
+import spofo.tradelog.service.TradeLogService;
 import spofo.tradelog.service.port.TradeLogRepository;
 
 /**

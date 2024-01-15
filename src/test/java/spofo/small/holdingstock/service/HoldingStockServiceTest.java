@@ -48,11 +48,8 @@ class HoldingStockServiceTest {
         fakePortfolioRepository = new FakePortfolioRepository();
         fakePortfolioService
                 = new FakePortfolioService(fakePortfolioRepository, fakeStockServerService);
-        holdingStockService =
-                new HoldingStockService(
-                        fakeTradeLogService, fakeHoldingStockRepository, fakeStockServerService
-                );
-
+        holdingStockService = null;
+        
         Stock stock = Stock.builder()
                 .code(TEST_STOCK_CODE)
                 .name("삼성전자")

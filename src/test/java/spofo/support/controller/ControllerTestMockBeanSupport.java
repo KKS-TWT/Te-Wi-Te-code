@@ -3,7 +3,7 @@ package spofo.support.controller;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import spofo.holdingstock.service.HoldingStockService;
 import spofo.portfolio.service.PortfolioService;
-import spofo.tradelog.controller.port.TradeLogService;
+import spofo.tradelog.service.TradeLogService;
 
 /**
  * ControllerTestMockBeanSupport를 상속받아 다양한 ControllerTestSupport를 구성할 수 있다. 예를들어 Spring Security를
